@@ -11,7 +11,6 @@ export default function BattleHook({ players = 2 }) {
     lastPlayer: "0",
     tiles: {},
     players,
-    player2MoveIndex: 0,
   };
 
   initState.tiles["1"] = {};
@@ -57,7 +56,6 @@ export default function BattleHook({ players = 2 }) {
         gameId: data.gameId,
       }).then((r) => {
         dispatch({ type: "fire", coordinates: r.coordinate, player: "2" });
-        dispatch({ type: "incrementPlayer2MoveIndex" });
       });
     },
     ...data,
@@ -114,11 +112,6 @@ function reducer(state, action) {
       }
 
       return _state;
-    case "incrementPlayer2MoveIndex":
-      return {
-        ...state,
-        player2MoveIndex: state.player2MoveIndex + 1,
-      };
     default:
       return state;
   }
